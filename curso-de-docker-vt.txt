@@ -153,7 +153,7 @@ $ docker run --name mi-apache -p 2244:80 -v //d/drojas/apache:/usr/local/apache2
                     # volumen remoto /usr/local/apache2/htdocs/, que es e que utiliza apache para servir las páginas web que se
                     # encuentren adentro de este directorios
 -d httpd            # indica la imagen en la que se va a basar el contenedor
-                    
+
 La configuración del mapeo de los volúmenes, lo incluye el contenedor en su dockerfile
 
 Para instalar ghost, no requiere sino solamente la imagen oficial
@@ -216,22 +216,24 @@ Instalar inikube en windows
 - Instalar kubectl
   CLI, cliente de línea de comandos de kubernetes
   Se puede instalar mediante el manejador de paquetes de windows, que es chocolately, que es un completo sistema de administración de paquetes, que hace similar a lo que hace apt get  o yum en sistemas linux o en unix, lo hace chocolately en windows
-  
+
+  https://chocolatey.org/install
+
   Una vez instalado chocolately, se procede a instalar kubectl, con el siguiente comando en el powershell o en el cmd
   $ choco install kubernetes-cli
-  
+
   Para verificar la versión, y validar que se haya instalado de forma correcta, se hace mediante el siguiente comando:
   $ kubectl version
-  
+
 - Instalar el minikube
   https://github.com/kubernetes/minikube
 
   Una vez instalado, se puede comprobar que está funcionando.
-  
+
 Borrar la versión que está instalada ahora
 $ minikube delete
 
-Con este comando inicia el kubernetes local, inicia la máquina virtual, lleva a cabo todo el proceso de configuración, 
+Con este comando inicia el kubernetes local, inicia la máquina virtual, lleva a cabo todo el proceso de configuración,
 $ minikube start
 
 Para comprobar que tanto kubectl como minikube, estan funcionando de modo correcto, ejecutamos el siguiente comando:
