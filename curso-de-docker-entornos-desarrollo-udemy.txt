@@ -1,0 +1,69 @@
+
+Instalación de docker
+- https://www.docker.com/products/docker-desktop
+- Para Windows y para MAC
+- Es necesario registrarse en la página para descargar el instalador de docker for desktop
+
+Linux
+apt install docker
+
+Instalar laravel
+- Descargar la versión de laravel de la página https://github.com/laravel/laravel
+- Se debe instalar PHP Composer en la máquina host
+- ejecutar el comando dentro de la carpeta de laravel:
+$ composer install
+
+Qué es un container
+- Todos los programas se instalan dentro del container de docker, para que docker ejecute dichos container
+- Son completamente aislados del sistema operativo
+- Pueden compartir ruta o puertos dependiendo de la configuración explícita del container
+
+Obtener la imagen de composer
+- Obtener la imagen de dockerhub, a través del comando:
+$ docker pull composer
+
+Con esto descarga la última versión de la imagen de la rama latest por defecto, a no ser que se le indique explícitamente la versión a descargar
+
+
+docker run --rm -it -v "$(pwd)":/app composer composer install
+
+docker # el comando de docker
+run                 # crea un container
+--rm                # cuando este container termine su ejecución, se elimina el container
+-it                 # flags -tty --interactive, si no se incluyen estos comandos, no se puede ver el output
+                    # de los comandos ingresados, y no se puede interactuar con el comando si solicita una entrada de parte del usuario
+-v "$(pwd)":/app    # Dentro del daemon docker, se ejecutan los containers, los cuales están aislados del sistema operativo, tampoco
+                    # comparten el sistema de archivos, lo que se requiere es que el directorio de laravel, se empaquete dentro
+                    # del container, para esto se le debe indicar a docker, que realice en mapeo entre la ruta del sistema de archivos
+                    # del sistema operativo host, con la estructura de directorios del container, una vez que el directorio de laravel
+                    # se haya incluido dentro del container, se ejecuta el comando composer install, que lo que hace es leer el
+                    # archivo composer.json, con todas las dependencias a instalar, como también para generar el directorio vendor,
+                    # en donde van a ser instaladas
+                    # Si se comprueba la línea
+                    # $ echo "$(pwd)"
+                    # lo que hace es mostrar la carpeta en la que está ubicado actualmente, y es la que se va a enlazar al container
+-d composer         # imagen en la que se va a basar el container
+composer install    # El comando que se va a ejecutar dentro del container
+
+
+Descargar la imagen de docker de dokerhub
+- Para iniciar un proyecto laravel en modo de desarrollo, se hace mediante el comando
+$ php artisan serve
+Pone en marcha un entorno local
+
+- Es necesario un contenedor de PHP, con la última versión, mediante el siguiente comando
+$ docker pull php
+
+Instalar las dependencias de laravel con dockerfile
+Luego de crear el archivo Dockerfile dentro del directorio de laravel, se procede a construir una imagen personalizada
+$ docker build -t captacion-php ./
+
+
+
+
+
+
+
+
+
+
