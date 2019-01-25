@@ -32,16 +32,18 @@ run                 # crea un container
 --rm                # cuando este container termine su ejecución, se elimina el container
 -it                 # flags -tty --interactive, si no se incluyen estos comandos, no se puede ver el output
                     # de los comandos ingresados, y no se puede interactuar con el comando si solicita una entrada de parte del usuario
--v "$(pwd)":/app    # Dentro del daemon docker, se ejecutan los containers, los cuales están aislados del sistema operativo, tampoco
-                    # comparten el sistema de archivos, lo que se requiere es que el directorio de laravel, se empaquete dentro
-                    # del container, para esto se le debe indicar a docker, que realice en mapeo entre la ruta del sistema de archivos
-                    # del sistema operativo host, con la estructura de directorios del container, una vez que el directorio de laravel
-                    # se haya incluido dentro del container, se ejecuta el comando composer install, que lo que hace es leer el
-                    # archivo composer.json, con todas las dependencias a instalar, como también para generar el directorio vendor,
-                    # en donde van a ser instaladas
+-v "$(pwd)":/app    # Dentro del daemon docker, se ejecutan los containers, los cuales están aislados del sistema 
+                    # operativo, tampoco comparten el sistema de archivos, lo que se requiere es que el directorio de 
+                    # laravel, se empaquete dentro del container, para esto se le debe indicar a docker, que realice 
+                    # en mapeo entre la ruta del sistema de archivos del sistema operativo host, con la estructura
+                    # de directorios del container, una vez que el directorio de laravel se haya incluido dentro del 
+                    # container, se ejecuta el comando composer install, que lo que hace es leer el
+                    # archivo composer.json, con todas las dependencias a instalar, como también para generar el
+                    # directorio vendor, en donde van a ser instaladas
                     # Si se comprueba la línea
                     # $ echo "$(pwd)"
-                    # lo que hace es mostrar la carpeta en la que está ubicado actualmente, y es la que se va a enlazar al container
+                    # lo que hace es mostrar la carpeta en la que está ubicado actualmente, y es la que se va a 
+                    # enlazar al container
 -d composer         # imagen en la que se va a basar el container
 composer install    # El comando que se va a ejecutar dentro del container
 
@@ -58,11 +60,27 @@ Instalar las dependencias de laravel con dockerfile
 Luego de crear el archivo Dockerfile dentro del directorio de laravel, se procede a construir una imagen personalizada
 $ docker build -t captacion-php ./
 
+Comando para crear un container a partir de la imagen generada del Dockerfile
+
+docker run --rm -it -p 8000:8000 -v "$(pwd)":/app captacion-php php artisan serve --host=0.0.0.0
+
+La primera vez que se genera un error 500, es porque no se encuentra el archivo .env en el directorio de laravel, por lo que se debe crear con una configuración por defecto, y se inicia con el comando anterior el container nuevamente
+
+Al inciarse, ahora el laravel, por la configuración del debug, ahora arroja otro error, por lo que se debe de generar un key, esto se debe de hacer con el siguiente comando:
+
+docker run --rm -it -p 8000:8000 -v "$(pwd)":/app captacion-php php artisan key:generate
+
+Con el comando anterior se genera una clave, y posteriormete modifica el archivo .env agregando dicha clave en base64, posteriormente se ejecuta de nuevo el comando siguiente:
+
+docker run --rm -it -p 8000:8000 -v "$(pwd)":/app captacion-php php artisan serve --host=0.0.0.0
+
+Con lo cual ya no arroja el error que anteriormente se presentaba.
 
 
+En la página, se pueden descargar plantillas predefinidas para mostrar en nuestro servidor de aplicaciones.
+https://startbootstrap.com/
 
-
-
+Ahora se va a desarrollar una aplicación, en la cual se va a registrar un correo electrónico, y este al diligenciarse va a enviar un e-mail con la información de que el sitio está en desarrollo, y que está inscrito en el mism, con lo cual se va a almacenar en una base de datos, posteriormente se va a leer los correos electrónicos almacenados en una base de datos mysql y se va a enviar la notificación por correo electrónico de que el sitio ya se encuentra listo, para esto se va a configurar la base de datos mysql, y también se va a conectar a un servicio FakeMail para realizar el envío de correos electrónicos.
 
 
 
