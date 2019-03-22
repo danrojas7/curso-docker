@@ -1,9 +1,5 @@
 
-En 2016 fue la aparición de los contenedores digitales dentro del desarrollo de software, principalmente de docker, lo que ofrece docker es un nuevo modo de empaquetar, ejecutar y distribuir aplicaciones
-
-Empaquetar en un único bloque todas las dependencias que necesita para ejecutarse, desde los binarios, librería, configuración y runtime todo lo que se pueda instalar en un servidor, el bloque recibe el nombre de contenedor docker, una unidad estándar para el desarrollo y despliegue de aplicaciones. Esto garantiza que el software se va a comportar del mismo modo sin importar en qué ambiente se ejecute
-
-Por ejemplo se pueden ejecutar contenedores con Node.js y con Java, que son dos tecnologías que no tienen en común entre sí, sin tener necesidad de tener instalado ninguno de los dos en la máquina host.
+En 2016 fue la aparición de los contenedores digitales dentro del desarrollo de software, principalmente de docker, lo que ofrece docker es un nuevo modo de empaquetar, ejecutar y distribuir aplicaciones. Empaquetar en un único bloque todas las dependencias que necesita para ejecutarse, desde los binarios, librería, configuración y runtime todo lo que se pueda instalar en un servidor, el bloque recibe el nombre de contenedor docker, una unidad estándar para el desarrollo y despliegue de aplicaciones. Esto garantiza que el software se va a comportar del mismo modo sin importar en qué ambiente se ejecute por ejemplo se pueden ejecutar contenedores con Node.js y con Java, que son dos tecnologías que no tienen en común entre sí, sin tener necesidad de tener instalado ninguno de los dos en la máquina host.
 
 No se trata ni de un lenguaje de programación, ni de un framework, es una herramienta que ayuda a solventar problemas comunes con la instalación, distribución y gestión de software. Permite a los programadores y a los DevOps construir, distribuir y ejecutar su código en cualquier sitio.
 
